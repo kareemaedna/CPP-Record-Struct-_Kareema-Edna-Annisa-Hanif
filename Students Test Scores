@@ -1,0 +1,103 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+struct studentType{
+	string studentFName;
+	string studentLName;
+	int testScore;
+	char grade;
+};
+
+//declarating functions	
+void assignGrades(studentType student[], int size);
+void announcement(const studentType student[], int size);
+int highestScore(const studentType student[], int size);
+	
+int main(){
+	//students' data into the array
+	studentType student[20];
+	student[0] = {"Abigail", "Rasmodius", 13};
+	student[1] = {"Leah", "Marlow", 91};
+	student[2] = {"Haley", "Wilde", 89};
+	student[3] = {"Alex", "Smith", 43};
+	student[4] = {"Samson", "Barrett", 44};
+	student[5] = {"Emily", "Wilde", 83};
+	student[6] = {"Penny", "Miller", 98};
+	student[7] = {"Elliott", "Churchill", 81};
+	student[8] = {"Maru", "Demetrius", 99};
+	student[9] = {"Sebastian", "Robinson", 90};
+	student[10] = {"Shane", "Adams", 76};
+	student[11] = {"Harvey", "Wilson", 99};
+	student[12] = {"Agatha", "Gray", 80};
+	student[13] = {"Edward", "Madison", 69};
+	student[14] = {"Auguste", "Comte", 77};
+	student[15] = {"Finn", "Alison", 100};
+	student[16] = {"Kenneth", "Wynn", 96};
+	student[17] = {"John", "Kennedy", 39};
+	student[18] = {"Warren", "Leslie", 85};
+	student[19] = {"Matthew", "Elric", 93};
+	
+	//call the function
+	assignGrades(student, 20);
+	announcement(student, 20);
+	int highestIndex = highestScore(student, 20);
+	
+	cout << endl;
+	cout << "Student with the highest score" << endl;
+	cout << "Name: " << student[highestIndex].studentFName << " " << student[highestIndex].studentLName << endl;
+	cout << "Score: " << student[highestIndex].testScore << endl;
+	cout << "Grade: " << student[highestIndex].grade << endl;
+	
+	return 0;
+}
+
+//function to assign the grades
+void assignGrades(studentType student[], int size){
+	for(int i = 0; i < size; i++)
+		if(student[i].testScore >= 90){
+			student[i].grade = 'A';
+		}
+		else if(student[i].testScore >= 80){
+			student[i].grade = 'B';
+		}
+		else if(student[i].testScore >= 70){
+			student[i].grade = 'C';
+		}
+		else if(student[i].testScore >= 60){
+			student[i].grade = 'D';
+		}
+		else if(student[i].testScore >= 50){
+			student[i].grade = 'E';
+		}
+		else{
+			student[i].grade = 'F';
+	}
+}
+
+//function to display the students' names and their scores
+void announcement(const studentType student[], int size){
+	cout << "Students Test Scores Announcement\n" << endl;
+	cout << left << setw(15) << "Last Name"
+		 << setw(15) << "First Name"
+		 << right << setw(12) << "Score"
+		 << setw(10) << "Grade" << endl;
+	cout << endl;
+
+	for(int i = 0; i < size; i++){
+		cout << left << setw(15) << (student[i].studentLName + ",") 
+			 << setw(15) << student[i].studentFName 
+			 << right << setw(12) << student[i].testScore
+			 << setw(10) << student[i].grade << endl;
+	}
+}
+
+//function to find the highest score
+int highestScore(const studentType student[], int size){
+	int highestIndex = 0;
+	for(int i = 1; i < size; i++)
+		if(student[i].testScore > student[highestIndex].testScore)
+			highestIndex = i;
+	return highestIndex;
+}
